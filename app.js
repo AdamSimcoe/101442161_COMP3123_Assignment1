@@ -9,9 +9,14 @@ require('dotenv').config();
 const app = express();
 
 // Initialize DB then run sample users data
-connectDB().then(async () => {
-    await setupSampleUsers();
-});
+connectDB()
+    .then(async () => {
+        await setupSampleUsers();
+    })
+    .catch(err => {
+        console.error('Failed to connect to the database.', err);
+        process.exit(1);
+    });
 
 app.use(express.json());
 
@@ -21,7 +26,7 @@ app.use('/api/v1/user', require('./controllers/userController'));
 // Employee Route Path
 app.use('/api/v1/emp', require('./controllers/employeeController'));
 
-// Set port, default set to 3000
+// Set port, default set to 3001
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}.`);
