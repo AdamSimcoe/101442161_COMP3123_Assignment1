@@ -16,7 +16,7 @@ router.post('/signup', async (req, res) => {
     }
 
     try {
-        const db = getDB();
+        const db = await getDB();
         
         // Check to see if a user with this email already exists
         const existingUser = await db.collection('users').findOne({email});
@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
     }
 
     try {
-        const db = getDB();
+        const db = await getDB();
     
         // Check to see user's email is correct
         const emailMatch = await db.collection('users').findOne({email})

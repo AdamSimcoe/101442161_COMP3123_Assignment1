@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 
 // Seed Sample Users if they do not already exist in DB
 const setupSampleUsers = async () => {
-    const db = getDB();
+    const db = await getDB();
 
     const sampleUsers = [
         {

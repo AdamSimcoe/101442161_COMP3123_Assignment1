@@ -19,20 +19,23 @@ let db;
 
 // Connect to the DB
 const connectDB = async () => {
+    if (db) return db;
+
     try {
         await client.connect();
         db = client.db(process.env.DB_NAME || 'comp3123_assignment1');
         console.log('Connected to MongoDB successfully!');
+        return db;
     } catch (err) {
         console.error('Error connecting to MongoDB:', err);
-        process.exit(1);
+        throw err;
     }
 };
 
 // Get initialized DB
-const getDB = () => {
+const getDB = async () => {
     if (!db) {
-        throw new Error('Database has not been initialized.');
+        await connectDB();
     }
     return db;
 };

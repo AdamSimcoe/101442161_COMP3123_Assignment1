@@ -16,7 +16,7 @@ router.post('/employees', async (req, res) => {
     }
 
     try {
-        const db = getDB();
+        const db = await getDB();
 
         // Insert new employee
         const result = await db.collection('employees').insertOne({
@@ -44,7 +44,7 @@ router.get('/employees/:id?', async (req, res) => {
     const {id} = req.params;
 
     try {
-        const db = getDB();
+        const db = await getDB();
 
         // Check to see if ID was provided
         if (id) {
@@ -87,7 +87,7 @@ router.put('/employees/:id', async (req, res) => {
     }
 
     try {
-        const db = getDB();
+        const db = await getDB();
 
         // Update fields of matching employee ID
         const employeeId = new ObjectId(id);
@@ -123,7 +123,7 @@ router.delete('/employees/:id', async (req, res) => {
     const {id} = req.params;
 
     try {
-        const db = getDB();
+        const db = await getDB();
         
         // Delete all fields matching employee ID
         const employeeId = new ObjectId(id);

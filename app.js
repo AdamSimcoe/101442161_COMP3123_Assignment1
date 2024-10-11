@@ -11,6 +11,7 @@ const app = express();
 // Initialize DB then run sample users data
 connectDB()
     .then(async () => {
+        console.log('Database connection established. Setting up sample user data.');
         await setupSampleUsers();
     })
     .catch(err => {
