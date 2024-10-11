@@ -5,8 +5,13 @@ const { process_params } = require('express/lib/router');
 const { MongoClient } = require('mongodb');
 require('dotenv').config();
 
-// Grab MongoDB URI from .env
+// Grab MongoDB URI from environment variable
 const uri = process.env.MONGO_URI;
+
+if (!uri) {
+    console.error('MONGO URI not defined in environment variables.');
+    process.exit(1);
+}
 
 // Create new MongoClient instance and initialize db
 const client = new MongoClient(uri);
